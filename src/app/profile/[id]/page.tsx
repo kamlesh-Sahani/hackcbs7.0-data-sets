@@ -7,13 +7,11 @@ import SkillsSection from '@/components/profile/SkillsSection';
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+    <div className="">
+      <div className="container mx-auto px-4 py-8 flex flex-col gap-4">
         <ProfileHeader />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <ProfileStats />
-          <DeploymentHistory />
-        </div>
+        <ProfileStats />
+        <DeploymentHistory />
         <SkillsSection />
       </div>
     </div>
