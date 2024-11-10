@@ -1,0 +1,23 @@
+export const problems = [
+    { id: "1", title: "Two Sum", difficulty: "Easy", timeLimit: 30 },
+    { id: "2", title: "Valid Parentheses", difficulty: "Medium", timeLimit: 45 },
+    { id: "3", title: "Merge K Sorted Lists", difficulty: "Hard", timeLimit: 60 },
+    { id: "4", title: "Longest Substring Without Repeating Characters", difficulty: "Medium", timeLimit: 40 },
+    { id: "5", title: "Reverse Integer", difficulty: "Easy", timeLimit: 30 },
+    { id: "6", title: "3Sum", difficulty: "Medium", timeLimit: 50 },
+    { id: "7", title: "Max Subarray Sum", difficulty: "Easy", timeLimit: 25 },
+    { id: "8", title: "Add Two Numbers", difficulty: "Medium", timeLimit: 40 },
+    { id: "9", title: "Container With Most Water", difficulty: "Hard", timeLimit: 60 },
+    { id: "10", title: "Find Peak Element", difficulty: "Medium", timeLimit: 45 },
+    { id: "11", title: "Valid Sudoku", difficulty: "Easy", timeLimit: 30 },
+    { id: "12", title: "Letter Combinations of a Phone Number", difficulty: "Medium", timeLimit: 50 },
+    { id: "13", title: "Search in Rotated Sorted Array", difficulty: "Medium", timeLimit: 40 },
+    { id: "14", title: "Longest Palindromic Substring", difficulty: "Hard", timeLimit: 70 },
+    { id: "15", title: "Clone Graph", difficulty: "Medium", timeLimit: 60 },
+    { id: "16", title: "Combination Sum", difficulty: "Medium", timeLimit: 45 },
+    { id: "17", title: "Permutations", difficulty: "Medium", timeLimit: 50 },
+    { id: "18", title: "Group Anagrams", difficulty: "Medium", timeLimit: 40 },
+    { id: "19", title: "Binary Tree Inorder Traversal", difficulty: "Easy", timeLimit: 30 },
+    { id: "20", title: "Kth Largest Element in an Array", difficulty: "Medium", timeLimit: 50 },
+  ];
+  
