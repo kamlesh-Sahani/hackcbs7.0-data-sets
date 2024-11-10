@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const chatSchema = new mongoose.Schema({
   participants: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'MyEventUser'
   }],
   messages: [{
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'MyEventUser'
     },
     content: String,
     createdAt: {
