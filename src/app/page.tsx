@@ -53,7 +53,7 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.8 }}
           >
             <Link
-              href="/upload"
+              href="/project"
               className="px-8 py-3 text-lg font-semibold text-white bg-[#003366] rounded-full shadow-lg hover:bg-[#0033668f] transition duration-300"
             >
               Get Started
