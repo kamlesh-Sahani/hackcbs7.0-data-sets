@@ -22,7 +22,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Welcome to the Modern Web
+          Welcome to the Datasets
         </motion.h1>
         <motion.p
           className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto"

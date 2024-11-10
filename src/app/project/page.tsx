@@ -1,18 +1,16 @@
-import ProjectCard from "@/components/ProjectCard";
-import { auth  } from '@/auth';
+
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
-import Project from "@/models/Project";
-
-
+import Project from "@/components/projects/Project";
 async function MainProject() {
-  const session=await auth();
+  const session = await auth();
   if (!session) {
     redirect("/login");
     return null;
   }
   return (
     <>
-    <Project/>
+      <Project />
     </>
   );
 }

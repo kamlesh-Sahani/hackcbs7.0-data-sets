@@ -11,7 +11,7 @@ const FileCard = ({ file }: any) => {
 };
 
 // RepositoryMenu Component
-const RepositoryMenu = async() => {
+const RepositoryMenu = () => {
     // Dummy JSON data for files
     const [files, setFiles] = useState([]);
     const [readmeContent, setReadmeContent] = useState<string>("");
@@ -77,7 +77,7 @@ const RepositoryMenu = async() => {
                             </div>
 
                             <div className='bg-red-400 max-w-[50%]'>
-                                gdg
+
                             </div>
 
                         </div>

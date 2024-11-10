@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const FileSchema = new mongoose.Schema({
   name: String,
   path: String,
