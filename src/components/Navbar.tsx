@@ -41,6 +41,18 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+ 
 import { Input } from "@/components/ui/input";
 import {
   Search,
@@ -56,10 +68,29 @@ import {
 import { FaFolder } from "react-icons/fa6";
 import { auth } from "@/auth";
 import NavSearch from "./NavSearch";
+import { getUserData } from "@/action/auth.action";
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role?: string;
+  image?: string;
 
+}
 export default async function Navbar() {
   // const { setTheme } = useTheme();
   // const [search, setSearch] = useState("");
+  const fetchedUser = await getUserData();
+  const formattedUser: User[] =
+    fetchedUser && Array.isArray(fetchedUser)
+      ? fetchedUser.map((userData: any) => ({
+          id: userData.id as string,
+          name: userData.name,
+          email: userData.email.toString(),
+          role: userData.role?.toString() || "",
+          image: userData.image,
+        }))
+      : [];
   const session = await auth();
 console.log(session)
   return (
@@ -116,6 +147,33 @@ console.log(session)
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
+                  
+                  <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/user/profile">
+                    <div className="flex items-center justify-center hover:text-gray-700">
+                      <Avatar className="bg-white">
+                        <AvatarImage
+                          src={
+                            formattedUser[0]?.image ||
+                            "/path/to/default-avatar.png"
+                          }
+                          alt={formattedUser[0]?.name || "User"}
+                        />
+                        <AvatarFallback>
+                          {formattedUser[0]?.name?.charAt(0) || "U"}
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent className=" border-none">
+                  <p className="">Profile</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+ 
                   <NavigationMenuItem>
                       <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
                         {/* <MessageSquare className="mr-2 h-4 w-4" />
