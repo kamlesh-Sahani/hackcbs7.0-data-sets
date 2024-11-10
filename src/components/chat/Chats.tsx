@@ -44,7 +44,7 @@ export default function Chats() {
           <div className="col-span-4 border rounded-lg">
             <div className="p-4 border-b">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold">Chats</h2>
+                <h2 className="text-xl font-semibold text-[#003366]">Chats</h2>
                 <NewChatDialog />
               </div>
               <ChatList onSelectChat={setSelectedChat} selectedChat={selectedChat} />
@@ -89,7 +89,7 @@ export default function Chats() {
             ) : (
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold">No Chat Selected</h3>
+                  <h3 className="text-lg font-semibold text-[#003366]">No Chat Selected</h3>
                   <p className="text-muted-foreground">
                     Select a chat from the sidebar or start a new conversation
                   </p>

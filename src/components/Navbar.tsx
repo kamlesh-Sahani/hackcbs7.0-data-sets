@@ -24,6 +24,7 @@
 // "use client";
 import { handleSignOut } from "@/action/auth.action";
 // import { useState } from "react";
+import { ScrollText } from 'lucide-react';
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -104,6 +105,14 @@ console.log(session)
                       <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
                         <MessageSquare className="mr-2 h-4 w-4" />
                         Chat
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/challenge" legacyBehavior passHref>
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
+                      <ScrollText className="mr-2 h-4 w-4" />
+                        Challenges
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>

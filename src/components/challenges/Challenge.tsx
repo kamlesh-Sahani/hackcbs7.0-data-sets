@@ -28,13 +28,13 @@ export default  function ChallengesPage() {
       <div className="container mx-auto p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <h1 className="text-3xl font-bold tracking-tight">Coding Challenges</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-[#003366]">Coding Challenges</h1>
             <p className="text-muted-foreground">
               Select a problem and start coding against the clock
             </p>
           </div>
           {!isTimerRunning && (
-            <Button onClick={handleStartChallenge} disabled={!selectedProblem}>
+            <Button onClick={handleStartChallenge} className="bg-[#003366] hover:bg-[#003366d7]" disabled={!selectedProblem}>
               <Rocket className="mr-2 h-4 w-4" />
               Start Challenge
             </Button>

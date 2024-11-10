@@ -38,7 +38,7 @@ export default function CodeEditor() {
             ))}
           </SelectContent>
         </Select>
-        <Button onClick={handleRunCode}>
+        <Button onClick={handleRunCode} className="bg-[#003366] hover:bg-[#003366df]">
           <Play className="mr-2 h-4 w-4" />
           Run Code
         </Button>
