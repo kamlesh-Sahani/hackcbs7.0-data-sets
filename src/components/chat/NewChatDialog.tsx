@@ -72,7 +72,7 @@ export default function NewChatDialog() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>New Chat</DialogTitle>
+          <DialogTitle className="text-[#003366]">New Chat</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[300px] pr-4">
           <div className="space-y-2">
@@ -107,7 +107,7 @@ export default function NewChatDialog() {
         <Button
           onClick={handleCreateChat}
           disabled={selectedUsers.length === 0}
-          className="mt-4"
+          className="mt-4 bg-[#003366] hover:bg-[#003366d1]"
         >
           Create Chat
         </Button>
