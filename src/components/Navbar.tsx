@@ -54,6 +54,7 @@ import {
 } from "lucide-react";
 import { FaFolder } from "react-icons/fa6";
 import { auth } from "@/auth";
+import NavSearch from "./NavSearch";
 
 export default async function Navbar() {
   // const { setTheme } = useTheme();
@@ -71,18 +72,7 @@ console.log(session)
         </div>
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-10 ">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <div className="relative">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search repositories..."
-                className="pl-8 outline-none border-white shadow-none w-[400px]"
-              // value={search}
-              // onChange={(e) => setSearch(e.target.value)}
-
-              />
-            </div>
-          </div>
+       <NavSearch/>
           {!session ? (
             <Link href="/login">
               <Button variant="default">Sign In</Button>
