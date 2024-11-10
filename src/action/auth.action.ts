@@ -7,8 +7,6 @@ import { auth } from "@/auth";
 export async function handleSignOut() {
   await signOut();
 }
-
-
 export const getUserData = async () => {
   await connectToMongoDb();
   const session = await auth();

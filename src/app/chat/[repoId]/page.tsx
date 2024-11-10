@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Send } from "lucide-react";
-
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
 interface Message {
   id: string;
   content: string;
@@ -20,7 +21,12 @@ interface Message {
   createdAt: string;
 }
 
-export default function ChatPage() {
+export default async function ChatPage() {
+  const session=await auth();
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
   const params = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");

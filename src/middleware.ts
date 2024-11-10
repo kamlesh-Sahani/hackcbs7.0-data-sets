@@ -4,19 +4,17 @@
 //     matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 // };
 ;
-import { NextResponse } from 'next/server';
-
-export async function middleware(req:any) {
+import { redirect } from 'next/navigation';
+import { auth } from './auth';
+import { NextRequest, NextResponse } from 'next/server';
+export async function middleware(req:NextRequest) {
  console.log(process.env.NEXTAUTH_SECRET );
+ const session = await auth();
+ console.log(session);
+ return NextResponse.redirect(new URL('/home', req.url))
 
-//   const protectedRoutes = ['/user', '/admin']; // Add any other protected routes
-  // const protectedRoutes = ['/'];
-  // // If the route is protected and there is no token, redirect to sign-in
-  // if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route)) && !token) {
-  //   return NextResponse.redirect(new URL('/signin', req.url));
-  // }
 }
 
 export const config = {
-  matcher: ['/user/:path*', '/admin/:path*'], // Protect routes under /user and /admin
+  matcher: ['/collaborator'], // Protect routes under /user and /admin
 };

@@ -3,7 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { FaFolder } from "react-icons/fa6";
 import ReactMarkdown from 'react-markdown';
 // FileCard Component
-const FileCard = ({ file }: any) => {
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
+const FileCard =async ({ file }: any) => {
+    const session=await auth();
+    if (!session) {
+      redirect("/login");
+      return null;
+    }
     return (
         <div className="cursor-pointer shadow p-2">
             <p className=" text-gray-500 flex gap-3  items-center text-xl hover:text-black"> < FaFolder className='text-blue-700 ' />{file.name}</p>
@@ -12,8 +19,13 @@ const FileCard = ({ file }: any) => {
 };
 
 // RepositoryMenu Component
-const RepositoryMenu = () => {
+const RepositoryMenu = async() => {
     // Dummy JSON data for files
+    const session=await auth();
+    if (!session) {
+      redirect("/login");
+      return null;
+    }
     const [files, setFiles] = useState([]);
     const [readmeContent, setReadmeContent] = useState<string>("");
 
@@ -69,7 +81,7 @@ const RepositoryMenu = () => {
                         <div className='w-full mt-5 flex '>
                             <div className="mt-4 flex flex-col gap-3 w-[50%]">
                                 {files.length > 0 ? (
-                                    files.map((file,index) => (
+                                    files.map((file, index) => (
                                         <FileCard key={index} file={file} />
                                     ))
                                 ) : (
@@ -78,15 +90,15 @@ const RepositoryMenu = () => {
                             </div>
 
                             <div className='bg-red-400 max-w-[50%]'>
-                  gdg
-                  </div>
+                                gdg
+                            </div>
 
                         </div>
 
                     </div>
                 </div>
 
-               
+
 
             </div>
 

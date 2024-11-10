@@ -1,5 +1,6 @@
 import ProjectCard from "@/components/ProjectCard";
-
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
 const projects = [
   {
     name: "Project One",
@@ -33,7 +34,12 @@ const projects = [
   },
 ];
 
-function HomePage() {
+async function Project() {
+  const session=await auth();
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
   return (
     <div className="p-10 flex-1">
       <main className="container mx-auto py-8">
@@ -58,4 +64,26 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Project;
+// import { Metadata } from 'next';
+// import ProjectList from '@/components/projects/ProjectList';
+// import UploadProject from '@/components/projects/UploadProject';
+
+// export const metadata: Metadata = {
+//   title: 'Projects | Dashboard',
+//   description: 'Upload and manage your code projects',
+// };
+
+// export default function ProjectsPage() {
+//   return (
+//     <div className="min-h-screen bg-background">
+//       <div className="container mx-auto px-4 py-8">
+//         <h1 className="text-3xl font-bold mb-8">Projects</h1>
+//         <div className="grid gap-8">
+//           <UploadProject />
+//           <ProjectList />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }

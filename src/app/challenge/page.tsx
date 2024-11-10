@@ -7,8 +7,14 @@ import Timer from "@/components/challenges/Timer";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Clock, Code2, Rocket } from "lucide-react";
-
-export default function ChallengesPage() {
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
+export default async function ChallengesPage() {
+  const session=await auth();
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
   const [selectedProblem, setSelectedProblem] = useState("");
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 

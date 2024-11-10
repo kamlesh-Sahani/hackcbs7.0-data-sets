@@ -21,9 +21,9 @@
 // export default Navbar
 
 
-"use client";
-
-import { useState } from "react";
+// "use client";
+import { handleSignOut } from "@/action/auth.action";
+// import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -53,11 +53,13 @@ import {
   BarChart,
 } from "lucide-react";
 import { FaFolder } from "react-icons/fa6";
+import { auth } from "@/auth";
 
-export default function Navbar() {
-  const { setTheme } = useTheme();
-  const [search, setSearch] = useState("");
-
+export default async function Navbar() {
+  // const { setTheme } = useTheme();
+  // const [search, setSearch] = useState("");
+  const session = await auth();
+console.log(session)
   return (
     <header className=" w-full border-b bg-[#003366]  px-10 text-white py-2 mb-5">
       <div className="container flex h-14 items-center">
@@ -75,43 +77,65 @@ export default function Navbar() {
               <Input
                 placeholder="Search repositories..."
                 className="pl-8 outline-none border-white shadow-none w-[400px]"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                
+              // value={search}
+              // onChange={(e) => setSearch(e.target.value)}
+
               />
             </div>
           </div>
+          {!session ? (
+            <Link href="/login">
+              <Button variant="default">Sign In</Button>
+            </Link>
+          ) : (
 
-          <NavigationMenu>
-            <NavigationMenuList className="flex gap-4 ">
-              <NavigationMenuItem >
-                <Link href="/upload" legacyBehavior passHref>
-                  <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
-                    <FaFolder className="mr-2 h-4 w-4"/>
-                    Upload
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/collaborate" legacyBehavior passHref>
-                  <NavigationMenuLink className=" hover:text-gray-300 flex  items-center" >
-                    <Users className="mr-2 h-4 w-4" />
-                    Collaborate
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/chat" legacyBehavior passHref>
-                  <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    Chat
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+            <form action={handleSignOut}>
 
-          <DropdownMenu>
+              <NavigationMenu>
+                <NavigationMenuList className="flex gap-4 ">
+                  <NavigationMenuItem >
+                    <Link href="/upload" legacyBehavior passHref>
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
+                        <FaFolder className="mr-2 h-4 w-4" />
+                        Upload
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/collaborate" legacyBehavior passHref>
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center" >
+                        <Users className="mr-2 h-4 w-4" />
+                        Collaborate
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link href="/chat" legacyBehavior passHref>
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
+                        <MessageSquare className="mr-2 h-4 w-4" />
+                        Chat
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
+                        {/* <MessageSquare className="mr-2 h-4 w-4" />
+                      Logout */}
+                        <button
+                          type="submit"
+                          className=" text-white rounded-full  px-2 py-2 transition duration-200"
+                        >
+                          Logout
+                          {/* <RiLogoutCircleRLine /> */}
+                        </button>
+                      </NavigationMenuLink>
+                  
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </form>
+          )}
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -130,7 +154,7 @@ export default function Navbar() {
                 System
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </div>
       </div>
     </header>

@@ -2,7 +2,14 @@ import { RepoUpload } from '@/components/repo-upload';
 import { RepoList } from '@/components/repo-list';
 import { SearchFilters } from '@/components/search-filters';
 import { Separator } from "@/components/ui/separator"
-export default function Home() {
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
+export default async function Home() {
+  const session=await auth();
+if (!session) {
+  redirect("/login");
+  return null;
+}
   return (
     <div className="  items-center  gap-5">
       <section className="space-y-6">

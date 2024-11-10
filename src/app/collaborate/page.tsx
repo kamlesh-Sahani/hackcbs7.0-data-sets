@@ -9,7 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Users, FolderGit2, Mail, Plus } from "lucide-react";
-
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
 interface Collaborator {
   id: string;
   name: string;
@@ -23,7 +24,12 @@ interface Folder {
   path: string;
 }
 
-export default function CollaboratorsPage() {
+export default async function CollaboratorsPage() {
+  const session=await auth();
+  if (!session) {
+    redirect("/login");
+    return null;
+  }
   const [selectedFolder, setSelectedFolder] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 

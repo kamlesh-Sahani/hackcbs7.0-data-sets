@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
@@ -10,12 +9,18 @@ import { Send, Plus } from "lucide-react";
 import ChatList from "@/components/chat/ChatList";
 import MessageList from "@/components/chat/MessageList";
 import NewChatDialog from "@/components/chat/NewChatDialog";
-
+import { auth  } from '@/auth';
+import { redirect } from 'next/navigation';
 export default function ChatPage() {
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
   const handleSendMessage = async () => {
+    const session=await auth();
+    if (!session) {
+      redirect("/login");
+      return null;
+    }
     if (!message.trim() || !selectedChat) return;
 
     try {
