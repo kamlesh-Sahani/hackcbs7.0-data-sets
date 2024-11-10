@@ -26,7 +26,7 @@ const ProjectCard = ({
     >
       <Link
         href={`/project/${url}`}
-        className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer flex flex-wrap"
+        className="bg-blue-100 p-6 rounded-xl border-2 border-gray-500 shadow-md hover:shadow-xl transition-shadow cursor-pointer flex flex-wrap"
       >
         <div className="flex justify-between items-center">
           <h3 className="text-xl font-semibold">

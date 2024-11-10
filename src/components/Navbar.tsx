@@ -20,11 +20,10 @@
 
 // export default Navbar
 
-
 // "use client";
 import { handleSignOut } from "@/action/auth.action";
 // import { useState } from "react";
-import { ScrollText } from 'lucide-react';
+import { ScrollText } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -46,13 +45,9 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
- 
+} from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { FolderDot } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import {
   Search,
@@ -75,7 +70,6 @@ export interface User {
   email: string;
   role?: string;
   image?: string;
-
 }
 export default async function Navbar() {
   // const { setTheme } = useTheme();
@@ -92,30 +86,29 @@ export default async function Navbar() {
         }))
       : [];
   const session = await auth();
-console.log(session)
+  console.log(session);
   return (
     <header className=" w-full border-b bg-[#003366]  px-10 text-white py-2 mb-5">
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex">
           <Link href="/" className="flex items-center space-x-2">
-            <Github className="h-6 w-6" />
-            <span className="font-bold">Datasets</span>
+            {/* <Github className="h-6 w-6" /> */}
+            <img src="/logo1.png" alt="" className="w-32 h-20 " />
+            <span className="font-bold">Where Code Finds Home</span>
           </Link>
         </div>
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-10 ">
-       <NavSearch/>
+          <NavSearch />
           {!session ? (
             <Link href="/login">
               <Button variant="default">Sign In</Button>
             </Link>
           ) : (
-
             <form action={handleSignOut}>
-
               <NavigationMenu>
                 <NavigationMenuList className="flex gap-4 ">
-                  <NavigationMenuItem >
+                  <NavigationMenuItem>
                     <Link href="/upload" legacyBehavior passHref>
                       <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
                         <FaFolder className="mr-2 h-4 w-4" />
@@ -125,7 +118,7 @@ console.log(session)
                   </NavigationMenuItem>
                   <NavigationMenuItem>
                     <Link href="/collaborate" legacyBehavior passHref>
-                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center" >
+                      <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
                         <Users className="mr-2 h-4 w-4" />
                         Collaborate
                       </NavigationMenuLink>
@@ -142,51 +135,58 @@ console.log(session)
                   <NavigationMenuItem>
                     <Link href="/challenge" legacyBehavior passHref>
                       <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
-                      <ScrollText className="mr-2 h-4 w-4" />
+                        <ScrollText className="mr-2 h-4 w-4" />
                         Challenges
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
-                  
-                  <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/user/profile">
-                    <div className="flex items-center justify-center hover:text-gray-700">
-                      <Avatar className="bg-white">
-                        <AvatarImage
-                          src={
-                            formattedUser[0]?.image ||
-                            "/path/to/default-avatar.png"
-                          }
-                          alt={formattedUser[0]?.name || "User"}
-                        />
-                        <AvatarFallback>
-                          {formattedUser[0]?.name?.charAt(0) || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-                    </div>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent className=" border-none">
-                  <p className="">Profile</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
- 
                   <NavigationMenuItem>
+                    <Link href="/project" legacyBehavior passHref>
                       <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
-                        {/* <MessageSquare className="mr-2 h-4 w-4" />
-                      Logout */}
-                        <button
-                          type="submit"
-                          className=" text-white rounded-full  px-2 py-2 transition duration-200"
-                        >
-                          Logout
-                          {/* <RiLogoutCircleRLine /> */}
-                        </button>
+                      <FolderDot className="mr-2 h-4 w-4" />
+                        Projects
                       </NavigationMenuLink>
-                  
+                    </Link>
+                  </NavigationMenuItem>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link href="/profile/1">
+                          <div className="flex items-center justify-center hover:text-gray-700">
+                            <Avatar className="bg-white">
+                              <AvatarImage
+                                src={
+                                  formattedUser[0]?.image ||
+                                  "/path/to/default-avatar.png"
+                                }
+                                alt={formattedUser[0]?.name || "User"}
+                              />
+                              <AvatarFallback>
+                                {formattedUser[0]?.name?.charAt(0) || "U"}
+                              </AvatarFallback>
+                            </Avatar>
+                          </div>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent className=" border-none">
+                        <p className="">Profile</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuLink className=" hover:text-gray-300 flex  items-center">
+                      {/* <MessageSquare className="mr-2 h-4 w-4" />
+                      Logout */}
+                      <button
+                        type="submit"
+                        className=" text-white rounded-full  px-2 py-2 transition duration-200"
+                      >
+                        Logout
+                        {/* <RiLogoutCircleRLine /> */}
+                      </button>
+                    </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
@@ -217,4 +217,3 @@ console.log(session)
     </header>
   );
 }
-
