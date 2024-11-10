@@ -6,20 +6,16 @@ import SkillsSection from '@/components/profile/SkillsSection';
 
 import { auth  } from '@/auth';
 import { redirect } from 'next/navigation';
-export default async function ProfilePage() {
+import ProfilePage from '@/components/profile/Profile';
+export default async function MainProfile() {
   const session=await auth();
   if (!session) {
     redirect("/login");
     return null;
   }
   return (
-    <div className="">
-      <div className="container mx-auto px-4 py-8 flex flex-col gap-4">
-        <ProfileHeader />
-        <ProfileStats />
-        <DeploymentHistory />
-        <SkillsSection />
-      </div>
-    </div>
+  <>
+  <ProfilePage/>
+  </>
   );
 }
