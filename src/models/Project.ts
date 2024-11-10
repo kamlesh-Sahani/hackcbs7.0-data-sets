@@ -14,7 +14,8 @@ const ProjectSchema = new mongoose.Schema({
   collabrators:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', 
-  }]
+  }],
+  stars:Number
 },{ timestamps: true });
 
 export default mongoose.models.Project || mongoose.model('Project', ProjectSchema);

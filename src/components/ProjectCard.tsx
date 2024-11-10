@@ -1,20 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';  // Import Framer Motion
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from 'next/link';
 
 const ProjectCard = ({
-  url,
   name,
-  language,
-  updated,
+  updatedAt,
   stars,
-  description
+  description,
+  url
 }: {
-  url: string;
   name: string;
-  language: string;
-  updated: string;
+  url: string;
+  updatedAt: string;
   stars: number;
   description: string;
 }) => {
@@ -26,23 +23,23 @@ const ProjectCard = ({
     >
       <Link
         href={`/project/${url}`}
-        className="bg-blue-100 p-6 rounded-xl border-2 border-gray-500 shadow-md hover:shadow-xl transition-shadow cursor-pointer flex flex-wrap"
+        className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer flex flex-wrap"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-2">
           <h3 className="text-xl font-semibold">
             <p className="text-blue-500 hover:underline">
               {name}
             </p>
           </h3>
           <span className="bg-gray-200 text-gray-700 text-sm py-1 px-2 rounded-md">
-            {language}
+            javascript
           </span>
         </div>
         <p className="text-gray-600 mt-3">{description}</p>
-        <div className="mt-4 flex justify-between text-sm text-gray-500">
-          <span>Updated {updated}</span>
+        <div className="mt-4 flex justify-between text-sm text-gray-500 flex-col gap-1">
+          <span>Updated {updatedAt}</span>
           <div className="flex space-x-2">
-            <span>⭐ {stars}</span>
+            <span>⭐ {stars || 1}</span>
           </div>
         </div>
       </Link>
