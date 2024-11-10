@@ -1,57 +1,54 @@
-import { NextResponse } from "next/server";
-import dbConnect from "@/lib/db";
-import Message from "@/lib/models/Message";
-export async function GET(req: Request) {
+import { NextResponse } from 'next/server';
+import connectToMongoDb from '@/utils/dbConnect';
+import Chat from '@/models/chat';
+
+
+export async function GET(request: Request) {
   try {
-    await dbConnect();
-    const { searchParams } = new URL(req.url);
-    const chatId = searchParams.get("chatId");
-    const cursor = searchParams.get("cursor");
-    const limit = 20;
-
-    if (!chatId) {
-      return NextResponse.json({ error: "Chat ID is required" }, { status: 400 });
-    }
-
-    let query = Message.find({ chatId });
-
-    if (cursor) {
-      query = query.where('_id').lt(cursor);
-    }
-
-    const messages = await query
-      .sort({ createdAt: -1 })
-      .limit(limit)
-      .populate('sender', 'name avatar')
-      .lean();
-
-    return NextResponse.json(messages);
+    const { searchParams } = new URL(request.url);
+    const chatId = searchParams.get('chatId');
+    
+    await connectToMongoDb();
+    const chat = await Chat.findById(chatId).populate('messages.sender');
+    
+    return NextResponse.json(chat.messages);
   } catch (error) {
-    console.error('Database Error:', error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch messages' },
+      { status: 500 }
+    );
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    await dbConnect();
-    const body = await req.json();
-    const { content, chatId, senderId, receiverId } = body;
-
-    const message = await Message.create({
+    const { chatId, senderId, content } = await request.json();
+    
+    await connectToMongoDb();
+    const chat = await Chat.findById(chatId);
+    
+    const message = {
+      sender: senderId,
       content,
-      chatId,
-      senderId,
-      receiverId,
-    });
+      createdAt: new Date()
+    };
 
-    const populatedMessage = await Message.findById(message._id)
-      .populate('sender', 'name avatar')
-      .lean();
+    chat.messages.push(message);
+    chat.lastMessage = {
+      content,
+      createdAt: new Date()
+    };
 
-    return NextResponse.json(populatedMessage);
+    await chat.save();
+    const populatedMessage = await Chat.populate(message, { path: 'sender' });
+    
+
+    
+    return NextResponse.json(populatedMessage, { status: 201 });
   } catch (error) {
-    console.error('Database Error:', error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to send message' },
+      { status: 400 }
+    );
   }
 }

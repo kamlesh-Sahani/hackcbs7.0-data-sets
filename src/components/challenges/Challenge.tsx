@@ -7,16 +7,13 @@ import Timer from "@/components/challenges/Timer";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Clock, Code2, Rocket } from "lucide-react";
+import { problems } from "@/lib/problens";
 export default  function ChallengesPage() {
 
   const [selectedProblem, setSelectedProblem] = useState("");
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  const problems = [
-    { id: "1", title: "Two Sum", difficulty: "Easy", timeLimit: 30 },
-    { id: "2", title: "Valid Parentheses", difficulty: "Medium", timeLimit: 45 },
-    { id: "3", title: "Merge K Sorted Lists", difficulty: "Hard", timeLimit: 60 },
-  ];
+
 
   const handleStartChallenge = () => {
     if (!selectedProblem) return;

@@ -15,15 +15,3 @@ export default async function MainChallengePage() {
   );
 }
 
-function getDifficultyColor(difficulty: string) {
-  switch (difficulty.toLowerCase()) {
-    case "easy":
-      return "text-green-500";
-    case "medium":
-      return "text-yellow-500";
-    case "hard":
-      return "text-red-500";
-    default:
-      return "";
-  }
-}

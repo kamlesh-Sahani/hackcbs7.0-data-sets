@@ -1,39 +1,17 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-
+import { problemDescription } from "@/lib/problemDescri[tion";
 interface ProblemDescriptionProps {
   problemId: string;
 }
 
 export default function ProblemDescription({ problemId }: ProblemDescriptionProps) {
   // Mock data - replace with actual problem descriptions from your database
-  const problems = {
-    "1": {
-      title: "Two Sum",
-      description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-      
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
-Example:
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].`,
-      examples: [
-        {
-          input: "nums = [2,7,11,15], target = 9",
-          output: "[0,1]",
-        },
-        {
-          input: "nums = [3,2,4], target = 6",
-          output: "[1,2]",
-        },
-      ],
-    },
-    // Add more problems here
-  };
 
-  const problem = problems[problemId as keyof typeof problems];
+
+  const problem = problemDescription[problemId as keyof typeof problemDescription];
 
   if (!problem) return null;
 
